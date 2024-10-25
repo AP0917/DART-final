@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #0c3572, #101d42);
+    color: white;
+    padding: 6rem 2rem;
+    text-align: center;
+    clip-path: ellipse(120% 100% at 50% 0%);
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.hero-section h1 {
+    font-size: 3.5rem;
+    color: #e0f2ff;
+    margin-bottom: 1rem;
+    animation: fadeInDown 1s ease-out;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.hero-section p {
+    font-size: 1.2rem;
+    color: #b8d2f1;
+    max-width: 800px;
+    margin: 0 auto;
+    animation: fadeInUp 1s ease-out;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.tiles-row, .videos-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.emergency-card, .video-container {
+    flex: 1;
+    max-width: calc(33.333% - 1.33rem);
+}
+
+.emergency-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.5s ease-out;
+}
+
+.emergency-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #007BFF, #00A6FF);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.emergency-card:hover {
+ transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.emergency-card:hover::before {
+    transform: scaleX(1);
+}
+
+.emergency-card h3 {
+    color: #007BFF;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.emergency-card i {
+    font-size: 1.8rem;
+    transition: transform 0.3s ease;
+}
+
+.emergency-card:hover i {
+    transform: scale(1.1);
+}
+
+.steps-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.steps-list li {
+    margin-bottom: 0.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+    transition: transform 0.2s ease;
+    color: #333;
+}
+
+.steps-list li:hover {
+    transform: translateX(5px);
+    color: #007BFF;
+}
+
+.steps-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: #007BFF;
+}
+
+.video-container {
+    flex: 1;
+    max-width: calc(33.333% - 1.33rem);
+}
+
+.emergency-banner {
+    background: linear-gradient(90deg, #ff4646, #ff7676);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    animation: pulse 2s infinite;
+    box-shadow: 0 5px 15px rgba(255, 70, 70, 0.2);
+}
+
+.emergency-banner i {
+    font-size: 2rem;
+}
+
+.navbar.light-mode {
+    background: linear-gradient(90deg, #007BFF, #00A6FF) !important;
+    color: white !important;
+}
+
+.navbar.light-mode h1,
+.navbar.light-mode ul li a {
+    color: white !important;
+}
+
+.navbar.light-mode ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity : 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .tiles-row, .videos-row {
+        flex-direction: column;
+    }
+
+    .emergency-card, .video-container {
+        max-width: 100%;
+    }
+
+    .hero-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section {
+        padding: 4rem 1rem;
+    }
+
+    .emergency-banner {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+}

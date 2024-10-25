@@ -1,0 +1,118 @@
+<!-- faq.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DART</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/faq.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar light-mode">
+        <div class="container">
+            <a href="index.html"><h1>DART</h1></a>
+           <!----<div class="hamburger">&#9776;</div>--->
+            <ul>
+                <li style="--i:1"><a href="index.html">Home</a></li>
+                <li style="--i:2"><a href="disasters.html">Disasters</a></li>
+                <li style="--i:3"><a href="prepare.html">Prepare</a></li>
+                <li style="--i:4"><a href="courses.html">Courses</a></li>
+                <li style="--i:5"><a href="faq.html">FAQ</a></li>
+                <li style="--i:6"><a href="contact.html">Contact</a></li>
+                <li style="--i:7"><a href="news.html">News</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+
+            <!-- Marquee for Announcements -->
+            <div class="marquee-container">
+                <marquee behavior="scroll" direction="left" scrollamount="6">
+                    <span class="faq-marquee">
+                        Did you know? Always have an emergency bag ready with essential supplies | Know your local evacuation routes | Sign up for disaster alerts in your area
+                    </span>
+                </marquee>
+            </div>
+
+            <!-- FAQ Grid -->
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>What should I do during an earthquake?</h3>
+                    <p>During an earthquake, Drop, Cover, and Hold On until the shaking stops. Stay away from windows and heavy furniture.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How can I prepare for a hurricane?</h3>
+                    <p>Prepare by creating an evacuation plan, stocking up on emergency supplies, and securing your home from potential damage.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What supplies should be in an emergency kit?</h3>
+                    <p>An emergency kit should contain water, food, first aid supplies, flashlights, batteries, and personal hygiene items.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How do I stay informed during a disaster?</h3>
+                    <p>Stay informed by signing up for local emergency alerts, listening to the radio, and monitoring official social media channels.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What should I do if I am caught in a flood?</h3>
+                    <p>Move to higher ground immediately, avoid walking or driving through floodwaters, and seek shelter on higher floors.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What are the signs of an approaching tsunami?</h3>
+                    <p>Signs of a tsunami include rapid water recession from the shore, an unusual roar from the ocean, or an earthquake in the area.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How can I protect my home from wildfires?</h3>
+                    <p>Clear dry vegetation around your property, use fire-resistant building materials, and have an evacuation plan in place.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What should I include in a family emergency plan?</h3>
+                    <p>Include meeting points, communication plans, an emergency contact list, and specific evacuation routes in your plan.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>What do I do if there is a power outage during a disaster?</h3>
+                    <p>Use battery-powered lights, avoid candles, conserve phone battery, and listen to emergency updates via radio.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>How can I help my community during a disaster?</h3>
+                    <p>Volunteer at shelters, donate supplies, and help neighbors with preparedness and evacuation, especially the elderly and disabled.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Disaster Awareness and Resource Tool. All rights reserved.</p>
+            <p>Credit to NDRF for Course Module Video</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Mobile Navbar Toggle -->
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.navbar ul');
+      
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+      
+</body>
+</html>

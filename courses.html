@@ -1,0 +1,87 @@
+<!-- courses.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DART</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/courses.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar light-mode">
+        <div class="container">
+            <a href="index.html"><h1>DART</h1></a>
+           <!----<div class="hamburger">&#9776;</div>--->
+            <ul>
+                <li style="--i:1"><a href="index.html">Home</a></li>
+                <li style="--i:2"><a href="disasters.html">Disasters</a></li>
+                <li style="--i:3"><a href="prepare.html">Prepare</a></li>
+                <li style="--i:4"><a href="courses.html">Courses</a></li>
+                <li style="--i:5"><a href="faq.html">FAQ</a></li>
+                <li style="--i:6"><a href="contact.html">Contact</a></li>
+                <li style="--i:7"><a href="news.html">News</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Courses Section -->
+    <section id="courses" class="section">
+        <div class="container">
+            <h2>Our Courses</h2>
+
+            <!-- Featured Course Section -->
+            <div class="featured-course">
+                <div class="featured-content">
+                    <h3>Featured Course: Disaster Preparedness 101</h3>
+                    <p>This course is designed to help you understand the basics of disaster preparedness, including making emergency kits, creating family evacuation plans, and staying informed during emergencies.</p>
+                    <a href="/courses/inst1.html" class="cta-btn">Enroll Now</a>
+                </div>
+                <div class="featured-image">
+                    <img src="/images/Courses.webp" alt="Disaster Preparedness Course">
+                </div>
+            </div>
+
+            <!-- Grid for Additional Courses -->
+            <div class="course-grid">
+                <div class="course-item">
+                    <h3>Earthquake</h3>
+                    <p>Learn how to protect yourself before professional help arrives.</p>
+                    <a href="/courses/course2.html" class="btn-secondary">Start Course</a>
+                </div>
+                <div class="course-item">
+                    <h3>Floods</h3>
+                    <p>Explore how to prepare yourself for floods and mitigate risks effectively.</p>
+                    <a href="/courses/course3.html" class="btn-secondary">Start Course</a>
+                </div>
+                <div class="course-item">
+                    <h3>Forest Fires</h3>
+                    <p>Understand fire hazards, fire prevention methods, and how to safely evacuate during a fire.</p>
+                    <a href="/courses/course4.html" class="btn-secondary">Start Course</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Disaster Awareness and Resource Tool. All rights reserved.</p>
+            <p>Credit to NDRF for Course Module Video</p>
+        </div>
+    </footer>
+
+    <!-- Script for Hamburger Menu -->
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.navbar ul');
+      
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+      
+</body>
+</html>

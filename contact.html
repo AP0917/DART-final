@@ -1,0 +1,128 @@
+<!-- contact.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DART</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/contact.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar light-mode">
+        <div class="container">
+            <a href="index.html"><h1>DART</h1></a>
+           <!----<div class="hamburger">&#9776;</div>--->
+            <ul>
+                <li style="--i:1"><a href="index.html">Home</a></li>
+                <li style="--i:2"><a href="disasters.html">Disasters</a></li>
+                <li style="--i:3"><a href="prepare.html">Prepare</a></li>
+                <li style="--i:4"><a href="courses.html">Courses</a></li>
+                <li style="--i:5"><a href="faq.html">FAQ</a></li>
+                <li style="--i:6"><a href="contact.html">Contact</a></li>
+                <li style="--i:7"><a href="news.html">News</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Loading and Success Popups -->
+    <div id="loading-popup" class="popup">
+        <p>Please wait, Sending.....</p>
+    </div>
+    <div id="success-popup" class="popup">
+        <p>Message sent successfully!</p>
+        <p>Thank You for Contacting Us!</p>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <p>If you have any questions, comments, or suggestions, feel free to reach out to us. Your feedback is valuable in helping us improve our resources and services.</p>
+            <form id="contact-form" class="contact-form">
+                <input type="hidden" name="contact_number">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Disaster Awareness and Resource Tool. All rights reserved.</p>
+            <p>Credit to NDRF for Course Module Video</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- EmailJS Script -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init('oZV7Qtubfwge3XVhA');
+        })();
+
+        window.onload = function() {
+            const form = document.getElementById('contact-form');
+            const loadingPopup = document.getElementById('loading-popup');
+            const successPopup = document.getElementById('success-popup');
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                this.contact_number.value = Math.random() * 100000 | 0; // Random contact number
+                
+                // Show loading popup
+                loadingPopup.style.display = 'block';
+                
+                // Send form using EmailJS
+                emailjs.sendForm('service_86at31g', 'template_6shahsc', this)
+                    .then(function() {
+                        console.log('SUCCESS!');
+                        loadingPopup.style.display = 'none'; // Hide loading popup
+                        successPopup.style.display = 'block'; // Show success popup
+                        // Hide success popup after 3 seconds
+                        setTimeout(() => {
+                            successPopup.style.display = 'none';
+                        }, 3000);
+                        form.reset(); // Reset the form
+                    }, function(error) {
+                        console.log('FAILED...', error);
+                        loadingPopup.style.display = 'none'; // Hide loading popup
+                        alert('Failed to send message. Please try again.'); // Alert user
+                    });
+            });
+        }
+    </script>
+
+
+    <!-- Hamburger Menu Script -->
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.navbar ul');
+      
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+      
+</body>
+</html>

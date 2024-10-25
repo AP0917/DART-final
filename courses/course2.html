@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-youtube/3.0.1/Youtube.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Enhanced Navbar Styles */
+        .navbar {
+            background: linear-gradient(90deg, #007BFF, #00A6FF);
+            color: white;
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .navbar {
+            background: linear-gradient(90deg, #005bb9, #0077b3);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            font-size: 1.8rem;
+            color: #fff;
+            animation: fadeInDown 0.5s ease-out;
+            margin: 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 30px;
+            animation: fadeInDown 0.5s ease-out;
+        }
+
+        .navbar ul li a {
+            color: white;
+            font-size: 1rem;
+            padding: 10px 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            color: white;
+            transition: color 0.3s ease;
+        }
+
+        /* Main Container Styles */
+        .main-container {
+            max-width: 1000px;
+            margin: 100px auto;
+            padding: 2.5rem;
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .dark-mode .main-container {
+            background-color: #2d2d2d;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Content Styles */
+        .main-container h1 {
+            font-size: 2.5rem;
+            color: #1a1f36;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .dark-mode .main-container h1 {
+            color: #f0f0f0;
+        }
+
+        .main-container p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .dark-mode .main-container p {
+            color: #d1d1d1;
+        }
+
+        /* Video Styles */
+        video {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2.5rem;
+            background-color: #000;
+        }
+
+        /* Quiz Styles */
+        #quiz-section {
+            display: none;
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-top: 2rem;
+        }
+
+        .dark-mode #quiz-section {
+            background-color: #2d2d2d;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .question {
+            background-color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+
+        .dark-mode .question {
+            background-color: #363636;
+            border-color: #404040;
+        }
+
+        .question:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .question p {
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .dark-mode .question p {
+            color: #f0f0f0;
+        }
+
+        .question label {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .dark-mode .question label {
+            background-color: #404040;
+            border-color: #505050;
+            color: #f0f0f0;
+        }
+
+        .question label:hover {
+            background-color: #f1f5f9;
+        }
+
+        .dark-mode .question label:hover {
+            background-color: #505050;
+        }
+
+        input[type="radio"] {
+            margin-right: 12px;
+            width: 18px;
+            height: 18px;
+            accent-color: #1a73e8;
+        }
+
+        /* Button Styles */
+        button {
+            background-color: #1a73e8;
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: auto;
+            min-width: 160px;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #1557b0;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #go-back-btn {
+            background-color: #ef4444;
+        }
+
+        #go-back-btn:hover {
+            background-color: #dc2626;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 16px;
+            max-width: 500px;
+            margin: 15% auto;
+            position: relative;
+            text-align: center;
+            animation: slideInDown 0.3s ease-out;
+        }
+
+        .dark-mode .modal-content {
+            background-color: #2d2d2d;
+            color: #f0f0f0;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.2s;
+        }
+
+        .dark-mode .close-btn {
+            color: #999;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .dark-mode .close-btn:hover {
+            color: #fff;
+        }
+
+        /* Certificate Input Styles */
+        #name-input {
+            display: none;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        #name-input input {
+            width: 100%;
+            max-width: 400px;
+            padding: 0.875rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .dark-mode #name-input input {
+            background-color: #404040;
+            border-color: #505050;
+            color: #f0f0f0;
+        }
+
+        #name-input input:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+
+        .submit-button {
+            display: block;
+            margin: 2rem auto;
+            background-color: #1a73e8;
+            color: white;
+            padding: 0.875rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: auto;
+            min-width: 160px;
+        }
+
+        .submit-button:hover {
+            background-color: #1557b0;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode .submit-button {
+            background-color: #2196f3;
+        }
+
+        .dark-mode .submit-button:hover {
+            background-color: #1976d2;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .navbar ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background-color: rgba(0, 123, 255, 0.9);
+                width: 100%;
+                padding: 20px 0;
+                text-align: center;
+                box-shadow: 0 8px 10px rgba(0, 0, 0, 0.1);
+                border-radius: 20px;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .navbar ul li {
+                margin: 10px 0;
+            }
+
+            .main-container {
+                margin: 80px 1rem;
+                padding: 1.5rem;
+            }
+
+            .navbar {
+                border-radius: 10px;
+                backdrop-filter: blur(20px);
+                background: linear-gradient(90deg, rgba(0, 123, 255, 0.511), rgba(0, 166, 255, 0.511));
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+#nextCourseModal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#nextCourseModal .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+}
+
+#nextCourseModal button {
+    margin: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar light-mode">
+        <div class="container">
+            <a href="/index.html"><h1>DART</h1></a>
+           <!----<div class="hamburger">&#9776;</div>--->
+            <ul>
+                <li style="--i:1"><a href="/index.html">Home</a></li>
+                <li style="--i:2"><a href="/disasters.html">Disasters</a></li>
+                <li style="--i:3"><a href="/prepare.html">Prepare</a></li>
+                <li style="--i:4"><a href="/courses.html">Courses</a></li>
+                <li style="--i:5"><a href="/faq.html">FAQ</a></li>
+                <li style="--i:6"><a href="/contact.html">Contact</a></li>
+                <li style="--i:7"><a href="/news.html">News</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <h1>Disaster Management: Earthquake</h1>
+        <p>Watch the full video to unlock the quiz. Score 75% or above to get your certificate.</p>
+        
+        <div id="video-container" style="width: 100%; max-width: 900px; margin: 0 auto;">
+            <video
+                id="my-video"
+                class="video-js vjs-default-skin vjs-big-play-centered vjs-16-9"
+                controls
+                preload="auto"
+                width="900"
+                height="506.25"
+                data-setup='{
+                    "techOrder": ["youtube"],
+                    "sources": [{
+                        "type": "video/youtube",
+                        "src": "https://www.youtube.com/watch?v=E5wLV3Hl1Xc&t=131s"
+                    }],
+                    "youtube": { "iv_load_policy": 3 }
+                }'
+            >
+            </video>
+            <div id="progress-message" style="display: none; text-align: center; margin-top: 10px;"></div>
+        </div>
+
+        <div id="quiz-section" style="display: none;">
+            <div class="question">
+                <p>1. What is an earthquake primarily caused by?</p>
+                <label><input type="radio" name="q1" value="a"> a) A sudden release of energy within the Earth's crust</label>
+                <label><input type="radio" name="q1" value="b"> b) A volcanic eruption</label>
+                <label><input type="radio" name="q1" value="c"> c) Weather changes</label>
+                <label><input type="radio" name="q1" value="d"> d) Human activities</label>
+            </div>
+            <div class="question">
+                <p>2. Which layer of the Earth is the outermost?</p>
+                <label><input type="radio" name="q2" value="a"> a) Mantle</label>
+                <label><input type="radio" name="q2" value="b"> b) Core</label>
+                <label><input type="radio" name="q2" value="c"> c) Crust</label>
+                <label><input type="radio" name="q2" value="d"> d) Lithosphere</label>
+            </div>
+            <div class="question">
+                <p>3. How many major tectonic plates are there?</p>
+                <label><input type="radio" name="q3" value="a"> a) Five</label>
+                <label><input type="radio" name="q3" value="b"> b) Seven</label>
+                <label><input type="radio" name="q3" value="c"> c) Ten</label>
+                <label><input type="radio" name="q3" value="d"> d) Twelve</label>
+            </div>
+            <div class="question">
+                <p>4. What type of boundary occurs when plates pull away from each other?</p>
+                <label><input type="radio" name="q4" value="a"> a) Convergent boundary</label>
+                <label><input type="radio" name="q4" value="b"> b) Transform boundary</label>
+                <label><input type="radio" name="q4" value="c"> c) Divergent boundary</label>
+                <label><input type="radio" name="q4" value="d"> d) Fault line</label>
+            </div>
+            <div class="question">
+                <p>5. What is the term for the point on the Earth's surface directly above the source of an earthquake?</p>
+                <label><input type="radio" name="q5" value="a"> a) Focus</label>
+                <label><input type="radio" name="q5" value="b"> b) Epicenter</label>
+                <label><input type="radio" name="q5" value="c"> c) Fault</label>
+                <label><input type="radio" name="q5" value="d"> d) Seismograph</label>
+            </div>
+            <div class="question">
+                <p>6. Which seismic wave is the first to arrive at a seismograph?</p>
+                <label><input type="radio" name="q6" value="a"> a) S waves</label>
+                <label><input type="radio" name="q6" value="b"> b) P waves</label>
+                <label><input type="radio" name="q6" value="c"> c) Surface waves</label>
+                <label><input type="radio" name="q6" value="d"> d) Tsunami waves</label>
+            </div>
+            <div class="question">
+                <p>7. What zone is referred to as having the highest risk of earthquakes?</p>
+                <label><input type="radio" name="q7" value="a"> a) Zone 1</label>
+                <label><input type="radio" name="q7" value="b"> b) Zone 2</label>
+                <label><input type="radio" name="q7" value="c"> c) Zone 4</label>
+                <label><input type="radio" name="q7" value="d"> d) Zone 5</label>
+            </div>
+            <div class="question">
+                <p>8. What instrument is used to record the intensity and duration of an earthquake?</p>
+                <label><input type="radio" name="q8" value="a"> a) Barometer</label>
+                <label><input type="radio" name="q8" value="b"> b) Altimeter</label>
+                <label><input type="radio" name="q8" value="c"> c) Seismograph</label>
+                <label><input type="radio" name="q8" value="d"> d) Thermometer</label>
+            </div>
+            <div class="question">
+                <p>9. Which earthquake magnitude scale indicates a 10 times increase in shaking with each point?</p>
+                <label><input type="radio" name="q9" value="a"> a) Richter scale</label>
+                <label><input type="radio" name="q9" value="b"> b) Moment magnitude scale</label>
+                <label><input type="radio" name="q9" value="c"> c) Mercalli scale</label>
+                <label><input type="radio" name="q9" value="d"> d) Seismic scale</label>
+            </div>
+            <div class="question">
+                <p>10. What safety measure should be included in a disaster kit for an earthquake?</p>
+                <label><input type="radio" name="q10" value="a"> a) A first aid kit</label>
+                <label><input type="radio" name="q10" value="b"> b) A map of the area</label>
+                <label><input type="radio" name="q10" value="c"> c) Extra clothes</label>
+                <label><input type="radio" name="q10" value="d"> d) A fishing rod</label>
+            </div>
+            <button type="button" class="submit-button" onclick="submitQuiz()">Submit Quiz</button>
+            
+
+        <div id="name-input">
+            <input type="text" id="user-name" placeholder="Enter your name for the certificate">
+            <button onclick="generateCertificate()">Generate Certificate</button>
+        </div>
+
+        <button onclick="submitQuiz()">Submit Quiz</button>
+        </div>
+
+        <div id="name-input">
+            <input type="text" id="user-name" placeholder="Enter your name for the certificate">
+            <button onclick="generateCertificate()">Generate Certificate</button>
+        </div>
+
+    <!-- Success Modal -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2>Congratulations!</h2>
+            <p>You scored 75% or above. You can now download your certificate.</p>
+            <button onclick="showNameInput(); closeModal()">Download Certificate</button>
+        </div>
+    </div>
+
+    <!-- Failure Modal -->
+    <div id="quizModal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal2()">&times;</span>
+            <h2>Score Below 75%</h2>
+            <p>Please try again to be better prepared for disasters!</p>
+            <button onclick="closeModal2()">Try Again</button>
+        </div>
+    </div>
+
+    <div id="nextCourseModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Disaster Awareness and Resource Tool. All rights reserved.</p>
+            <p>Credit to NDRF for Course Module Video</p>
+        </div>
+    </footer>
+
+    <script src="/JS/course2.js"></script>
+</body>
+</html>

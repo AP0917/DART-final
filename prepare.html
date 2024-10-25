@@ -1,0 +1,76 @@
+<!-- prepare.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DART</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/prepare.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar light-mode">
+        <div class="container">
+            <a href="index.html"><h1>DART</h1></a>
+           <!----<div class="hamburger">&#9776;</div>--->
+            <ul>
+                <li style="--i:1"><a href="index.html">Home</a></li>
+                <li style="--i:2"><a href="disasters.html">Disasters</a></li>
+                <li style="--i:3"><a href="prepare.html">Prepare</a></li>
+                <li style="--i:4"><a href="courses.html">Courses</a></li>
+                <li style="--i:5"><a href="faq.html">FAQ</a></li>
+                <li style="--i:6"><a href="contact.html">Contact</a></li>
+                <li style="--i:7"><a href="news.html">News</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Prep Section -->
+    <section id="faq" class="section">
+        <div class="container">
+            <h2>Preparation</h2>
+
+            <!-- Marquee -->
+            <div class="marquee-container">
+                <marquee behavior="scroll" direction="left" scrollamount="6">
+                    <span class="faq-marquee">
+                        "By failing to prepare, you are preparing to fail."      |      "Plans are worthless, but planning is indispensable."
+                    </span>
+                </marquee>
+            </div>
+
+            <!-- FAQ Grid -->
+            <div class="faq-grid">
+                <div class="prep-item">
+                    <h3>Schools</h3>
+        <p>How can Schools ensure the safety of staff and students during a calamity? 
+            <a href="https://megrevenuedm.gov.in/msdma/plans/school-disaster-mgmt-plan.pdf">Know more here.</a>
+                </div>
+
+                <div class="prep-item">
+                    <h3>Institutions</h3>
+                    <p>How can Institutions prevent loss of life?</p>
+                    <a href="https://ndma.gov.in/sites/default/files/PDF/Sikkim_Conclave/Session%202/1%20z%20NDMA%20Disaster%20Management%20PPT%20by%20JS%20(PP)%20-%20Revised.pdf">Know more here.</a>
+                </div>
+
+                <div class="prep-item">
+                    <h3>Self</h3>
+                    <p>How can you ensure that you and your family are safe? Know more here</p>
+                    <a href="http://rcueslucknow.org/publication/TrainingModules/Dr.A.K.Singh/HandBookDisasterManagement.pdf">Know more here.</a>
+                </div>
+
+
+    <!-- JavaScript for Mobile Navbar Toggle -->
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.navbar ul');
+      
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+      
+</body>
+</html>

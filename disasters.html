@@ -1,0 +1,115 @@
+<!-- disasters.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DART</title>
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/disasters.css">
+</head>
+<body>
+
+    <nav class="navbar light-mode">
+        <div class="container">
+            <a href="index.html"><h1>DART</h1></a>
+           <!----<div class="hamburger">&#9776;</div>--->
+            <ul>
+                <li style="--i:1"><a href="index.html">Home</a></li>
+                <li style="--i:2"><a href="disasters.html">Disasters</a></li>
+                <li style="--i:3"><a href="prepare.html">Prepare</a></li>
+                <li style="--i:4"><a href="courses.html">Courses</a></li>
+                <li style="--i:5"><a href="faq.html">FAQ</a></li>
+                <li style="--i:6"><a href="contact.html">Contact</a></li>
+                <li style="--i:7"><a href="news.html">News</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Section for Disasters -->
+    <section id="disasters" class="section">
+        <div class="container">
+            <h2>Ongoing Disasters in India</h2>
+            
+            <!-- Marquee for Ongoing Disasters -->
+            <div class="marquee-container">
+                <marquee behavior="scroll" direction="left" scrollamount="6">
+                    <span class="disaster-marquee">
+                        Monsoon Flooding in Andhra Pradesh - Severe flooding in multiple districts | 
+                        Earthquake in Manipur - 4.1 magnitude felt in several states | 
+                        Cyclone Dana impacting Odisha - landfall in Odisha's Puri | 
+                        Landslides in Sikkim - loss of around ₹327.67 crore | 
+                        Drought conditions in Rajasthan - Water conservation tips | 
+                        Severe Heatwave in Bihar - Precautions to take during extreme temperatures | 
+                        Air Quality Crisis in Delhi - Stay indoors and use air purifiers | 
+                        Forest Fires in Uttarakhand - over 1,000 hectares of forest area |
+                    </span>
+                </marquee>
+            </div>
+
+            <div class="disaster-grid">
+                <!-- Quick Survival Guide for each disaster -->
+                <div class="disaster-item">
+                    <img src="/images/flood.png" alt="Flood" width="100px" height="auto">
+                    <h3>Monsoon Flooding in Andhra Pradesh</h3>
+                    <p><strong>Safety Advice:</strong> Move to higher ground and stay informed about the latest warnings.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/earthquake.png" alt="Earthquake" width="100px" height="auto">
+                    <h3>Earthquake in Manipur</h3>
+                    <p><strong>Safety Advice:</strong> Drop, Cover, and Hold On during the quake; check for injuries afterward.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/tornado.png" alt="Cyclone" width="100px" height="auto">
+                    <h3>Cyclone Dana</h3>
+                    <p><strong>Safety Advice:</strong> Evacuate if instructed and prepare for possible power outages.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/landslide.png" alt="Landslide" width="100px" height="auto">
+                    <h3>Landslides in Sikkim</h3>
+                    <p><strong>Safety Advice:</strong> Avoid traveling in affected areas; keep emergency supplies handy.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/drought.png" alt="Drought" width="100px" height="auto">
+                    <h3>Drought Conditions in Rajasthan</h3>
+                    <p><strong>Safety Advice:</strong> Conserve water and follow local guidelines for water use.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/heat-wave.png" alt="Heatwave" width="100px" height="auto">
+                    <h3>Severe Heatwave in Bihar</h3>
+                    <p><strong>Safety Advice:</strong> Stay hydrated, avoid outdoor activities during peak heat, and use fans or AC.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/car.png" alt="Air Quality" width="100px" height="auto">
+                    <h3>Air Quality Crisis in Delhi</h3>
+                    <p><strong>Safety Advice:</strong> Limit outdoor exposure, wear masks, and use air purifiers indoors.</p>
+                </div>
+                <div class="disaster-item">
+                    <img src="/images/wildfire.png" alt="Wildfire" width="100px" height="auto">
+                    <h3>Forest Fires in Uttarakhand</h3>
+                    <p><strong>Safety Advice:</strong> Evacuate if you are in the vicinity and avoid smoke inhalation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Disaster Awareness and Resource Tool. All rights reserved.</p>
+            <p>Credit to NDRF for Course Module Video</p>
+        </div>
+    </footer>
+
+    <!-- Script for Hamburger Menu -->
+    <script>
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.navbar ul');
+      
+        hamburger.addEventListener('click', () => {
+          navMenu.classList.toggle('active');
+        });
+    </script>
+      
+</body>
+</html>

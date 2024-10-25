@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions</title>
+    <style>
+        /* Default Light Mode Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 100px auto; /* Adjusted margin for the fixed navbar */
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        /* Heading */
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1.2s ease-out;
+        }
+
+        /* Instructions List */
+        ul {
+            text-align: left;
+            margin: 2rem 0;
+            padding: 0;
+            list-style: none;
+            animation: fadeInUp 1.5s ease-out;
+            border-radius: 20px;
+            border: 1px solid black;
+        }
+
+        ul li {
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+        }
+
+        /* Styled Anchors as Buttons */
+        .nav-button,
+        .prev-button {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 10px 20px;
+            font-size: 1.1rem;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none; /* Remove underline */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .nav-button:hover,
+        .prev-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 2rem;
+            font-size: 1rem;
+            color: #555;
+            animation: fadeInUp 1.8s ease-out;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 1.5rem;
+            }
+
+            ul li {
+                font-size: 1rem;
+            }
+
+            .nav-button,
+            .prev-button {
+                font-size: 1rem;
+            }
+        }
+
+        /* Dark Mode Styles */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #ffffff;
+            }
+
+            .container {
+                background-color: #1e1e1e;
+                box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            }
+
+            ul {
+                border: 1px solid #444;
+            }
+
+            ul li {
+                background-color: #333;
+                color: #ffffff;
+            }
+
+            .nav-button,
+            .prev-button {
+                background-color: #007bff;
+            }
+
+            .nav-button:hover,
+            .prev-button:hover {
+                background-color: #0056b3;
+            }
+
+            footer {
+                color: #bbb;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Course Instructions</h1>
+        <p>Follow these steps to complete the course and earn your certificate:</p>
+        <ul>
+            <li>1. Start by clicking on the video to begin watching the course content.</li>
+            <li>2. Ensure that you watch the video in its entirety without skipping.</li>
+            <li>3. Once the video has finished, the "Download Certificate" button will appear.</li>
+            <li>4. Click on the "Download Certificate" button to proceed.</li>
+            <li>5. Enter your full name when prompted. This will be the name displayed on your certificate.</li>
+            <li>6. Click "Generate Certificate" to download your personalized certificate as a PDF.</li>
+            <li>7. Save the certificate to your device, or print it for future reference.</li>
+        </ul>
+        
+        <!-- Navigation Anchors Styled as Buttons -->
+        <a class="nav-button" href="javascript:history.back()">Go Back</a>
+        <a class="prev-button" href="course1.html">Enroll</a> <!-- Change 'courses.html' to your desired page -->
+
+        <footer>
+            If you encounter any issues, please reach out to our support team for assistance.
+            <p>&copy; 2024 Disaster Awareness and Resource Tool. All rights reserved.</p>
+            <p>Credit to NDRF for Course Module Video</p>
+        </footer>
+    </div>
+</body>
+</html>
