@@ -1,89 +1,121 @@
 // Your API key for NewsData.io
 const API_KEY = 'pub_5695608439e5f2b46d80ceb59517e6761da7a';
+const BASE_URL = 'https://newsdata.io/api/1/news';
+let articles = [];
+let currentArticleIndex = 0;
+const articlesPerLoad = 10; // Load more articles at once
 
 // Fetch disaster-related articles from NewsData.io
 async function fetchNewsArticles() {
-    const query = 'tornado OR earthquake OR cyclone OR landslide OR fire OR flood OR natural disaster OR disaster';
-    const url = `https://newsdata.io/api/1/news?apikey=${API_KEY}&q=${encodeURIComponent(query)}&country=in&language=en`;
+    const url = `${BASE_URL}?apikey=${API_KEY}&q=flood OR rain OR cyclone OR earthquake OR fire OR disaster OR natural disaster&country=in&language=en`;
 
     try {
         const response = await fetch(url);
-
         if (response.ok) {
             const data = await response.json();
-            displayNewsArticles(data.results);  // Use the correct property from the response
+            articles = data.results;  // Store articles globally
+            displayArticles();
+            document.getElementById('load-more').style.display = articles.length > articlesPerLoad ? 'block' : 'none';
         } else {
-            console.error('Failed to fetch articles:', response.status);
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
     } catch (err) {
-        console.error('Error in fetch:', err);
+        console.error('Error fetching articles:', err);
+        document.getElementById('news-container').innerHTML = `<p class="no-articles-message">Failed to load articles. Please try again later.</p>`;
     }
-}
-
-// Function to truncate text to a specific length
-function truncateText(text, maxLength) {
-    if (text.length > maxLength) {
-        return text.slice(0, maxLength) + '...'; // Add ellipsis if truncated
-    }
-    return text;
 }
 
 // Display articles on the page
-function displayNewsArticles(articles) {
+function displayArticles() {
     const newsContainer = document.getElementById('news-container');
-    newsContainer.innerHTML = '';  // Clear existing articles
+    const articlesToDisplay = articles.slice(currentArticleIndex, currentArticleIndex + articlesPerLoad);
 
-    if (articles && articles.length > 0) {
-        articles.forEach(article => {
+    if (articlesToDisplay.length === 0 && currentArticleIndex === 0) {
+        newsContainer.innerHTML = '<p class="no-articles-message">No articles available.</p>';
+        return;
+    }
+
+    articlesToDisplay.forEach(article => {
+        const newsItem = document.createElement('div');
+        newsItem.classList.add('news-item');
+
+        const imageUrl = article.image_url || '';
+        const description = article.description || article.body || 'No description available';
+        const truncatedBody = description.length > 100 ? description.substring(0, 100) + '...' : description;
+
+        newsItem.innerHTML = `
+            <div class="news-image ${imageUrl ? '' : 'fallback'}">
+                ${imageUrl ? `<img src="${imageUrl}" alt="News Image">` : `<i class="fas fa-newspaper"></i>`}
+            </div>
+            <h4>${article.title || 'No Title'}</h4>
+            <p>${truncatedBody}</p>
+            <small class="date">${new Date(article.pubDate).toLocaleDateString()}</small>
+            <a class="read-more" href="${article.link}" target="_blank">Read More</a>
+        `;
+        newsContainer.appendChild(newsItem);
+    });
+
+    currentArticleIndex += articlesPerLoad;
+    document.getElementById('load-more').style.display = currentArticleIndex < articles.length ? 'block' : 'none';
+}
+
+// Load more articles when button is clicked
+function loadMoreArticles() {
+    displayArticles();
+}
+
+// Search function with debounce
+let debounceTimeout;
+function filterArticles() {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+        const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+
+        if (searchTerm === '') {
+            currentArticleIndex = 0;
+            document.getElementById('news-container').innerHTML = '';
+            displayArticles();
+            return;
+        }
+
+        const filteredArticles = articles.filter(article =>
+            (article.title && article.title.toLowerCase().includes(searchTerm)) ||
+            (article.body && article.body.toLowerCase().includes(searchTerm)) ||
+            (article.description && article.description.toLowerCase().includes(searchTerm))
+        );
+
+        currentArticleIndex = 0;
+        const newsContainer = document.getElementById('news-container');
+        newsContainer.innerHTML = '';
+
+        const articlesToDisplay = filteredArticles.slice(currentArticleIndex, currentArticleIndex + articlesPerLoad);
+        articlesToDisplay.forEach(article => {
             const newsItem = document.createElement('div');
             newsItem.classList.add('news-item');
 
-            const imageUrl = article.image_url || '';  // Use image if available
-            const truncatedDescription = truncateText(article.description || 'No description available', 150); // Limit to 150 characters
+            const imageUrl = article.image_url || '';
+            const description = article.description || article.body || 'No description available';
+            const truncatedBody = description.length > 100 ? description.substring(0, 100) + '...' : description;
 
             newsItem.innerHTML = `
                 <div class="news-image ${imageUrl ? '' : 'fallback'}">
                     ${imageUrl ? `<img src="${imageUrl}" alt="News Image">` : `<i class="fas fa-newspaper"></i>`}
                 </div>
-                <h4>${article.title}</h4>
-                <p>${truncatedDescription}</p>
+                <h4>${article.title || 'No Title'}</h4>
+                <p>${truncatedBody}</p>
                 <small class="date">${new Date(article.pubDate).toLocaleDateString()}</small>
                 <a class="read-more" href="${article.link}" target="_blank">Read More</a>
             `;
-
-            // Handle image loading errors
-            const img = newsItem.querySelector('img');
-            if (img) {
-                img.onerror = function() {
-                    img.style.display = 'none';
-                    newsItem.querySelector('.news-image').classList.add('fallback');
-                    newsItem.querySelector('.news-image').innerHTML = `<i class="fas fa-newspaper"></i>`;
-                };
-            }
-
             newsContainer.appendChild(newsItem);
         });
-    } else {
-        newsContainer.innerHTML = '<p>No relevant disaster-related news available at the moment.</p>';
-    }
+
+        currentArticleIndex += articlesPerLoad;
+        document.getElementById('load-more').style.display = currentArticleIndex < filteredArticles.length ? 'block' : 'none';
+    }, 300);  // debounce delay of 300ms
 }
 
-// Filter articles based on search input
-function filterArticles() {
-    const searchTerm = document.getElementById('search-bar').value.toLowerCase();
-    const articles = document.querySelectorAll('.news-item');
-
-    articles.forEach(article => {
-        const title = article.querySelector('h4').textContent.toLowerCase();
-        const body = article.querySelector('p').textContent.toLowerCase();
-        
-        if (title.includes(searchTerm) || body.includes(searchTerm)) {
-            article.style.display = 'block'; // Show article
-        } else {
-            article.style.display = 'none'; // Hide article
-        }
-    });
-}
-
-// Fetch articles when the page loads
-document.addEventListener('DOMContentLoaded', fetchNewsArticles);
+// Initial article fetch and setup load more functionality
+document.addEventListener('DOMContentLoaded', () => {
+    fetchNewsArticles();
+    document.getElementById('load-more').addEventListener('click', loadMoreArticles);
+});

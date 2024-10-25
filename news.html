@@ -4,24 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Disaster News - DART</title>
+    <meta name="description" content="Stay updated on real-time disaster news and incidents across India and Delhi.">
+    <meta name="keywords" content="disaster, news, flood, cyclone, earthquake, fire, natural disaster">
+    <meta name="author" content="DART">
     <link rel="stylesheet" href="/css/common.css">
     <link rel="stylesheet" href="/css/news.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 
     <!-- Navigation Bar -->
-    <nav class="navbar light-mode">
+    <nav class="navbar">
         <div class="container">
             <a href="index.html"><h1>DART</h1></a>
             <ul>
-                <li style="--i:1"><a href="index.html">Home</a></li>
-                <li style="--i:2"><a href="disasters.html">Disasters</a></li>
-                <li style="--i:3"><a href="prepare.html">Prepare</a></li>
-                <li style="--i:4"><a href="courses.html">Courses</a></li>
-                <li style="--i:5"><a href="faq.html">FAQ</a></li>
-                <li style="--i:6"><a href="contact.html">Contact</a></li>
-                <li style="--i:7"><a href="news.html">News</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="disasters.html">Disasters</a></li>
+                <li><a href="prepare.html">Prepare</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="news.html">News</a></li>
             </ul>
         </div>
     </nav>
@@ -42,27 +46,24 @@
 
                 <!-- Search Bar -->
                 <div class="search-container">
-                    <input type="text" id="search-bar" placeholder="Search articles..." oninput="filterArticles()">
-                    <button id="search-button"><i class="fas fa-search"></i></button>
+                    <input type="text" id="search-bar" placeholder="Search articles..." aria-label="Search articles" oninput="filterArticles()">
+                    <button id="search-button" aria-label="Search"><i class="fas fa-search"></i></button>
                 </div>
 
                 <div id="news-container" class="news-grid">
                     <!-- News articles will be injected here -->
                 </div>
+
+                <!-- Load More Button -->
+                <button id="load-more">Load More</button>
             </div>
         </section>
     </main>
 
-    <!-- Footer Section -->
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Disaster Awareness and Resource Tool. All rights reserved.</p>
-            <p>Credit to NDRF for Course Module Video</p>
-        </div>
+        <p>&copy; 2024 Disaster Awareness Response Team (DART). All rights reserved.</p>
     </footer>
 
-    <!-- External JS Scripts -->
-    <script src="/JS/news.js"></script>
-
+    <script src="/js/news.js"></script>
 </body>
 </html>
